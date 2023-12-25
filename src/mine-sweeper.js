@@ -23,9 +23,47 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  let arr = [];
+  let rows = matrix.length;
+  let columns = matrix[0].length;
+  let countBombs = 0;
+
+  for (let i = 0; i < rows; i += 1) {
+    arr.push([]);
+
+    for (let j = 0; j < columns; j += 1) {
+      if (i - 1 >= 0 && j - 1 >= 0 && i - 1 < rows && j - 1 < columns && matrix[i - 1][j - 1] === true) {
+        countBombs += 1;
+      }
+      if (i - 1 >= 0 && j >= 0 && i - 1 < rows && j < columns && matrix[i - 1][j] === true) {
+        countBombs += 1;
+      }
+      if (i - 1 >= 0 && j + 1 >= 0 && i - 1 < rows && j + 1 < columns && matrix[i - 1][j + 1] === true) {
+        countBombs += 1;
+      }
+      if (i >= 0 && j - 1 >= 0 && i < rows && j - 1 < columns && matrix[i][j - 1] === true) {
+        countBombs += 1;
+      }
+      if (i >= 0 && j + 1 >= 0 && i < rows && j + 1 < columns && matrix[i][j + 1] === true) {
+        countBombs += 1;
+      }
+      if (i + 1 >= 0 && j - 1 >= 0 && i + 1 < rows && j - 1 < columns && matrix[i + 1][j - 1] === true) {
+        countBombs += 1;
+      }
+      if (i + 1 >= 0 && j >= 0 && i + 1 < rows && j < columns && matrix[i + 1][j] === true) {
+        countBombs += 1;
+      }
+      if (i + 1 >= 0 && j + 1 >= 0 && i + 1 < rows && j + 1 < columns && matrix[i + 1][j + 1] === true) {
+        countBombs += 1;
+      }
+
+      arr[i].push(countBombs);
+      countBombs = 0;
+    }
+  }
+
+  return arr;
 }
 
 module.exports = {
